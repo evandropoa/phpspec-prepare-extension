@@ -54,10 +54,10 @@ class BeforeMaintainer implements MaintainerInterface
     public function prepare(ExampleNode $example, SpecificationInterface $context,
                             MatcherManager $matchers, CollaboratorManager $collaborators)
     {
-        $spec = $example->getSpecification()->getClassReflection()->newInstance();
+        //$spec = $example->getSpecification()->getClassReflection()->newInstance();
         $beforeMethod = $example->getSpecification()->getClassReflection()->getMethod($this->beforeMethod);
         $this->createMissingCollabolators($collaborators, $beforeMethod);
-        $beforeMethod->invokeArgs($spec, $collaborators->getArgumentsFor($beforeMethod));
+        $beforeMethod->invokeArgs($context, $collaborators->getArgumentsFor($beforeMethod));
     }
 
     /**
